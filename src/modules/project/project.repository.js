@@ -81,6 +81,12 @@ const projectRepository = {
         websiteLink,
       } = projectData;
 
+      const [existing_image] = await db.query("SELECT image FROM projects WHERE id = ?", [id]);
+
+      const current_image = existing_image.length ? existing_image[0].image : null;
+
+      const finalImage = image ? image : current_image;
+
       const query = `
         UPDATE projects 
         SET title = ?, description = ?, image = ?, tags = ?, category = ?, 
@@ -91,7 +97,7 @@ const projectRepository = {
       await db.query(query, [
         title,
         description,
-        image,
+        finalImage,
         JSON.stringify(tags),
         JSON.stringify(category),
         featured ? 1 : 0,
@@ -102,8 +108,7 @@ const projectRepository = {
       ]);
 
       return {
-        id,
-        ...projectData,
+        id
       };
     } catch (error) {
       throw error;

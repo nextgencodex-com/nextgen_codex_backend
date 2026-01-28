@@ -8,7 +8,7 @@ import {
 import authService from "./modules/auth/auth.service.js";
 
 const PORT = process.env.PORT || 5000;
-const ADMIN_USERNAME = process.env.ADMIN_USERNAME || "admin";
+const ADMIN_USERNAME = process.env.ADMIN_USERNAME;
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 
 // Initialize database on startup

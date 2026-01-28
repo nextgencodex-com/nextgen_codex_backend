@@ -2,6 +2,7 @@ import { Router } from "express";
 import userRoutes from "../modules/user/user.routes.js";
 import authRoutes from "../modules/auth/auth.routes.js";
 import projectRoutes from "../modules/project/project.routes.js";
+import blogRoutes from "../modules/blog/blog.routes.js";
 
 const routes = Router();
 
@@ -13,5 +14,8 @@ routes.use("/users", userRoutes);
 
 // Project routes
 routes.use("/projects", projectRoutes);
+
+// Blog routes
+routes.use("/blogs", blogRoutes);
 
 export default routes;

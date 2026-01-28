@@ -133,13 +133,6 @@ const projectService = {
         };
       }
 
-      // Image must be provided (either existing or new upload)
-      if (!projectData.image) {
-        return {
-          success: false,
-          message: "Project image is required",
-        };
-      }
 
       if (
         !Array.isArray(projectData.category) ||
@@ -153,19 +146,8 @@ const projectService = {
 
       const updatedProject = await projectRepository.update(id, projectData);
 
-      // Parse JSON fields
-      const parsedProject = {
-        ...updatedProject,
-        tags: Array.isArray(updatedProject.tags) ? updatedProject.tags : [],
-        category: Array.isArray(updatedProject.category)
-          ? updatedProject.category
-          : [],
-        featured: Boolean(updatedProject.featured),
-      };
-
       return {
         success: true,
-        data: parsedProject,
       };
     } catch (error) {
       throw error;

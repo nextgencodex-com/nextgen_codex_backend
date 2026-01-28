@@ -64,3 +64,4 @@ export const seedAdminUser = async (username, hashedPassword) => {
     console.error("Error seeding admin user:", error);
   }
 };
+
