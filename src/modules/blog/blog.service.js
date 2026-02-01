@@ -226,7 +226,6 @@ const blogService = {
 
       return {
         success: true,
-        data: newBlog,
         message: "Blog created successfully",
       };
     } catch (error) {
@@ -265,10 +264,6 @@ const blogService = {
         const updatedBlog = await blogRepository.findById(id);
         return {
           success: true,
-          data: {
-            ...updatedBlog,
-            tags: updatedBlog.tags ? JSON.parse(updatedBlog.tags) : [],
-          },
           message: "Blog updated successfully",
         };
       } else {

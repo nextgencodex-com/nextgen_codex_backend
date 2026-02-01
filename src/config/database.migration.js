@@ -65,3 +65,37 @@ export const seedAdminUser = async (username, hashedPassword) => {
   }
 };
 
+//Create blog table if it doesn't exist
+export const initializeBlogTable = async () => {
+  try {
+    const createTableQuery = `
+      CREATE TABLE IF NOT EXISTS blogs (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        title VARCHAR(255) NOT NULL,
+        slug VARCHAR(255) UNIQUE NOT NULL,
+        content LONGTEXT NOT NULL,
+        excerpt TEXT,
+        author VARCHAR(255),
+        cover_image VARCHAR(255),
+        category VARCHAR(100),
+        tags JSON,
+        featured BOOLEAN DEFAULT FALSE,
+        status ENUM('draft', 'published') DEFAULT 'draft',
+        published_at TIMESTAMP NULL,
+        meta_title VARCHAR(255),
+        meta_description TEXT,
+        read_time INT,
+        video_url VARCHAR(500) NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+      )
+    `;
+
+    await db.query(createTableQuery);
+    console.log("✅ Blogs table initialized");
+        
+    }catch (error) {
+      console.error("Error initializing blogs table:", error);
+    }
+};
+

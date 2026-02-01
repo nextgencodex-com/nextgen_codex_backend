@@ -1,6 +1,6 @@
 import { Router } from "express";
 import projectController from "./project.controller.js";
-import upload from "../../config/multer.config.js";
+import { uploadProjects } from "../../config/multer.config.js";
 import verifyToken from "../../middlewares/jwt.middleware.js";
 
 const router = Router();
@@ -26,7 +26,7 @@ router.get("/:id", projectController.getProjectById);
 router.post(
   "/",
   verifyToken,
-  upload.single("image"),
+  uploadProjects.single("image"),
   projectController.createProject
 );
 
@@ -34,7 +34,7 @@ router.post(
 router.put(
   "/:id",
   verifyToken,
-  upload.single("image"),
+  uploadProjects.single("image"),
   projectController.updateProject
 );
 

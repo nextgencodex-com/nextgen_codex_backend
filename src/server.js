@@ -3,6 +3,7 @@ import app from "./app.js";
 import {
   initializeAdminTable,
   initializeProjectsTable,
+  initializeBlogTable,
   seedAdminUser,
 } from "./config/database.migration.js";
 import authService from "./modules/auth/auth.service.js";
@@ -19,6 +20,9 @@ const initializeApp = async () => {
 
     // Create projects table
     await initializeProjectsTable();
+
+    // create blogs table
+    await initializeBlogTable();
 
     // Create initial admin user with hashed password (only if password is set in .env)
     if (ADMIN_PASSWORD) {
