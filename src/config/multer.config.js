@@ -77,4 +77,81 @@ const uploadBlogs = multer({
   },
 });
 
-export { uploadProjects, uploadBlogs };
+// ===== CLIENT DOCUMENTS UPLOAD CONFIG =====
+const clientDocsUploadsDir = path.join(
+  __dirname,
+  "../../public/uploads/clients"
+);
+if (!fs.existsSync(clientDocsUploadsDir)) {
+  fs.mkdirSync(clientDocsUploadsDir, { recursive: true });
+}
+
+const documentFileFilter = (req, file, cb) => {
+  const allowedMimes = [
+    "application/pdf",
+    "application/msword",
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "application/vnd.ms-excel",
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    "application/vnd.ms-powerpoint",
+    "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+    "text/plain",
+    "application/zip",
+    "image/jpeg",
+    "image/png",
+    "image/gif",
+    "image/webp",
+  ];
+
+  const allowedExts = [
+    ".pdf",
+    ".doc",
+    ".docx",
+    ".xls",
+    ".xlsx",
+    ".ppt",
+    ".pptx",
+    ".txt",
+    ".zip",
+    ".jpg",
+    ".jpeg",
+    ".png",
+    ".gif",
+    ".webp",
+  ];
+
+  const ext = path.extname(file.originalname).toLowerCase();
+
+  if (allowedMimes.includes(file.mimetype) && allowedExts.includes(ext)) {
+    cb(null, true);
+  } else {
+    cb(
+      new Error(
+        "Unsupported file type. Allowed: pdf, doc, docx, xls, xlsx, ppt, pptx, txt, zip, jpg, jpeg, png, gif, webp"
+      ),
+      false
+    );
+  }
+};
+
+const clientDocumentsStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, clientDocsUploadsDir);
+  },
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    const ext = path.extname(file.originalname);
+    const name = path.basename(file.originalname, ext);
+    cb(null, `${name}-${uniqueSuffix}${ext}`);
+  },
+});
+
+const uploadClientDocuments = multer({
+  storage: clientDocumentsStorage,
+  fileFilter: documentFileFilter,
+  limits: {
+    fileSize: 10 * 1024 * 1024, // 10MB max size
+  },
+});
+
+export { uploadProjects, uploadBlogs, uploadClientDocuments };
