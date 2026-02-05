@@ -32,7 +32,7 @@ const clientDocumentService = {
       }
 
       const document = await clientDocumentRepository.create(docData);
-      return { success: true, data: document };
+      return { success: true };
     } catch (error) {
       throw error;
     }
