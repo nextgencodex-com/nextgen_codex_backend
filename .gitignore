@@ -60,3 +60,6 @@ docker-data/
 # Uploaded Files / Media
 # ===============================
 public/uploads/
+
+/setup.sql
+/addAdmin.js
