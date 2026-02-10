@@ -9,8 +9,6 @@ yarn-error.log*
 # ===============================
 # Environment variables
 # ===============================
-.env
-.env.local
 .env.*.local
 
 # ===============================
@@ -28,7 +26,6 @@ Thumbs.db
 # ===============================
 # IDE / Editor
 # ===============================
-.vscode/
 .idea/
 *.swp
 
@@ -56,3 +53,11 @@ temp/
 # Docker
 # ===============================
 docker-data/
+# ===============================
+# Uploaded Files / Media
+# ===============================
+public/uploads/
+
+/setup.sql
+/addAdmin.js
+config.bat
