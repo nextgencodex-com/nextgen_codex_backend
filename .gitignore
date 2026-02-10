@@ -9,8 +9,6 @@ yarn-error.log*
 # ===============================
 # Environment variables
 # ===============================
-.env
-.env.local
 .env.*.local
 
 # ===============================
@@ -56,3 +54,11 @@ temp/
 # Docker
 # ===============================
 docker-data/
+# ===============================
+# Uploaded Files / Media
+# ===============================
+public/uploads/
+
+/setup.sql
+/addAdmin.js
+config.bat
