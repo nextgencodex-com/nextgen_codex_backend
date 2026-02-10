@@ -29,7 +29,7 @@ const clientProjectService = {
       }
 
       const project = await clientProjectRepository.create(projectData);
-      return { success: true, data: project };
+      return { success: true };
     } catch (error) {
       throw error;
     }
@@ -47,7 +47,7 @@ const clientProjectService = {
       }
 
       const updated = await clientProjectRepository.update(id, projectData);
-      return { success: true, data: updated };
+      return { success: true };
     } catch (error) {
       throw error;
     }

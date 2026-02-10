@@ -169,7 +169,7 @@ const clientPaymentController = {
 
       return res.status(200).json(apiResponse(200, null, result.message));
     } catch (error) {
-      return res.status(500).json(apiResponse(500, null, error.message));
+      return res.status(500).json(apiResponse(500, null, error.message));        
     }
   },
 

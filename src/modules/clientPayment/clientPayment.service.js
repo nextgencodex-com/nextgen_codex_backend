@@ -62,7 +62,7 @@ const clientPaymentService = {
       }
 
       const payment = await clientPaymentRepository.create(paymentData);
-      return { success: true, data: payment };
+      return { success: true };
     } catch (error) {
       throw error;
     }
@@ -89,7 +89,7 @@ const clientPaymentService = {
       }
 
       const updated = await clientPaymentRepository.update(id, paymentData);
-      return { success: true, data: updated };
+      return { success: true };
     } catch (error) {
       throw error;
     }

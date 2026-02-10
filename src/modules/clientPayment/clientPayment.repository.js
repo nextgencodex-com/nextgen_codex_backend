@@ -63,7 +63,7 @@ const clientPaymentRepository = {
         status || "pending",
       ]);
 
-      return { id: result.insertId, ...paymentData };
+      return { id: result.insertId };
     } catch (error) {
       throw error;
     }
