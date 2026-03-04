@@ -60,6 +60,17 @@ const projectController = {
           .json(apiResponse(400, null, "Project data is required"));
       }
 
+      // Parse JSON strings from FormData
+      if (typeof projectData.tags === 'string') {
+        projectData.tags = JSON.parse(projectData.tags);
+      }
+      if (typeof projectData.category === 'string') {
+        projectData.category = JSON.parse(projectData.category);
+      }
+      if (typeof projectData.featured === 'string') {
+        projectData.featured = projectData.featured === 'true';
+      }
+
       // Handle file upload
       if (req.file) {
         projectData.image = `/uploads/projects/${req.file.filename}`;
@@ -107,6 +118,17 @@ const projectController = {
         return res
           .status(400)
           .json(apiResponse(400, null, "Project data is required"));
+      }
+
+      // Parse JSON strings from FormData
+      if (typeof projectData.tags === 'string') {
+        projectData.tags = JSON.parse(projectData.tags);
+      }
+      if (typeof projectData.category === 'string') {
+        projectData.category = JSON.parse(projectData.category);
+      }
+      if (typeof projectData.featured === 'string') {
+        projectData.featured = projectData.featured === 'true';
       }
 
       // If new file is uploaded, handle it

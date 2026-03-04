@@ -37,6 +37,7 @@ const authService = {
         success: true,
         data: {
           id: admin.id,
+          username: admin.username,
           token: token,
         },
       };

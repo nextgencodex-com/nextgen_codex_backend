@@ -38,7 +38,10 @@ const projectsStorage = multer.diskStorage({
   filename: (req, file, cb) => {
     const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
     const ext = path.extname(file.originalname);
-    const name = path.basename(file.originalname, ext);
+    const name = path.basename(file.originalname, ext)
+      .replace(/\s+/g, '-')           // Replace spaces with hyphens
+      .replace(/[^\w\-]/g, '')        // Remove special characters except hyphens
+      .toLowerCase();                 // Convert to lowercase
     cb(null, `${name}-${uniqueSuffix}${ext}`);
   },
 });
@@ -64,7 +67,10 @@ const blogsStorage = multer.diskStorage({
   filename: (req, file, cb) => {
     const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
     const ext = path.extname(file.originalname);
-    const name = path.basename(file.originalname, ext);
+    const name = path.basename(file.originalname, ext)
+      .replace(/\s+/g, '-')           // Replace spaces with hyphens
+      .replace(/[^\w\-]/g, '')        // Remove special characters except hyphens
+      .toLowerCase();                 // Convert to lowercase
     cb(null, `${name}-${uniqueSuffix}${ext}`);
   },
 });
@@ -141,7 +147,10 @@ const clientDocumentsStorage = multer.diskStorage({
   filename: (req, file, cb) => {
     const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
     const ext = path.extname(file.originalname);
-    const name = path.basename(file.originalname, ext);
+    const name = path.basename(file.originalname, ext)
+      .replace(/\s+/g, '-')           // Replace spaces with hyphens
+      .replace(/[^\w\-]/g, '')        // Remove special characters except hyphens
+      .toLowerCase();                 // Convert to lowercase
     cb(null, `${name}-${uniqueSuffix}${ext}`);
   },
 });

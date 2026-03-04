@@ -118,6 +118,11 @@ const blogController = {
           .json(apiResponse(400, null, "Blog data is required"));
       }
 
+      // Parse JSON strings from FormData
+      if (typeof blogData.tags === 'string') {
+        blogData.tags = JSON.parse(blogData.tags);
+      }
+
       // Handle file upload
       if (req.file) {
         blogData.coverImage = `/uploads/blogs/${req.file.filename}`;
@@ -165,6 +170,11 @@ const blogController = {
         return res
           .status(400)
           .json(apiResponse(400, null, "Blog data is required"));
+      }
+
+      // Parse JSON strings from FormData
+      if (typeof blogData.tags === 'string') {
+        blogData.tags = JSON.parse(blogData.tags);
       }
 
       // Handle file upload
