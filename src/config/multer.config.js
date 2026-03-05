@@ -163,4 +163,36 @@ const uploadClientDocuments = multer({
   },
 });
 
-export { uploadProjects, uploadBlogs, uploadClientDocuments };
+// ===== EMPLOYEE PHOTOS UPLOAD CONFIG =====
+const employeeUploadsDir = path.join(
+  __dirname,
+  "../../public/uploads/Employee"
+);
+if (!fs.existsSync(employeeUploadsDir)) {
+  fs.mkdirSync(employeeUploadsDir, { recursive: true });
+}
+
+const employeeStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, employeeUploadsDir);
+  },
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    const ext = path.extname(file.originalname);
+    const name = path.basename(file.originalname, ext)
+      .replace(/\s+/g, '-')           // Replace spaces with hyphens
+      .replace(/[^\w\-]/g, '')        // Remove special characters except hyphens
+      .toLowerCase();                 // Convert to lowercase
+    cb(null, `${name}-${uniqueSuffix}${ext}`);
+  },
+});
+
+const uploadEmployee = multer({
+  storage: employeeStorage,
+  fileFilter: fileFilter,
+  limits: {
+    fileSize: 5 * 1024 * 1024, // 5MB max size
+  },
+});
+
+export { uploadProjects, uploadBlogs, uploadClientDocuments, uploadEmployee };
