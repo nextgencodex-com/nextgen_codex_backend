@@ -213,3 +213,31 @@ export const initializeClientDocumentsTable = async () => {
     console.error("Error initializing client documents table:", error);
   }
 };
+
+// Create careers table if it doesn't exist
+export const initializeCareersTable = async () => {
+  try {
+    const createTableQuery = `
+      CREATE TABLE IF NOT EXISTS careers (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        title VARCHAR(255) NOT NULL,
+        department ENUM('Engineering', 'Design', 'Business') NOT NULL,
+        location VARCHAR(255) NOT NULL,
+        type VARCHAR(100) NOT NULL,
+        description LONGTEXT NOT NULL,
+        requirements JSON NOT NULL,
+        technologies JSON NOT NULL,
+        status ENUM('active', 'closed') DEFAULT 'active',
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        INDEX idx_department (department),
+        INDEX idx_status (status)
+      )
+    `;
+
+    await db.query(createTableQuery);
+    console.log("✅ Careers table initialized");
+  } catch (error) {
+    console.error("Error initializing careers table:", error);
+  }
+};

@@ -8,6 +8,7 @@ import {
   initializeClientProjectsTable,
   initializeClientPaymentsTable,
   initializeClientDocumentsTable,
+  initializeCareersTable,
   seedAdminUser,
 } from "./config/database.migration.js";
 import authService from "./modules/auth/auth.service.js";
@@ -27,6 +28,9 @@ const initializeApp = async () => {
 
     // create blogs table
     await initializeBlogTable();
+
+    // create careers table
+    await initializeCareersTable();
 
     // create client management tables
     await initializeClientsTable();

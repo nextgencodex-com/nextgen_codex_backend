@@ -9,8 +9,6 @@ yarn-error.log*
 # ===============================
 # Environment variables
 # ===============================
-.env
-.env.local
 .env.*.local
 
 # ===============================
@@ -63,3 +61,4 @@ public/uploads/
 
 /setup.sql
 /addAdmin.js
+config.bat
